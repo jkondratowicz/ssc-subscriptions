@@ -4,21 +4,21 @@
 // @namespace   https://www.skyscrapercity.com/watched/
 // @icon        https://images.platforum.cloud/icons/skyscrapercity_comx32.ico
 // @include     https://www.skyscrapercity.com/watched/*
+// @include     https://www.skyscrapercity.com/whats-new/posts/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @grant       GM.openInTab
-// @version     1.1.0
+// @version     1.1.1
 // @author      toonczyk
-// @downloadURL https://raw.githubusercontent.com/jkondratowicz/ssc-subscriptions/master/ssc_subscriptions.js
+// @downloadURL ---
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-
     const newNode = document.createElement('span');
     newNode.setAttribute ('class', 'unreadContainer');
 
-    function reaclculateElCount() {
+    function recalculateElCount() {
         const elCount = $('div.structItem.is-unread').size();
         if (elCount > 0) {
             newNode.innerHTML = '<button class="unreadButton button california-following-normal button" type="button">Open unread (<strong>' + elCount +'</strong>) in new tabs 💬</button>';
@@ -27,10 +27,14 @@
         }
     }
 
-    reaclculateElCount();
-
+    recalculateElCount();
 
     $('div.california-outer-upper-nav').append(newNode);
+
+    const newPostNavDiv = $('div.california-upper-page-nav');
+    if (newPostNavDiv.size()) {
+        $(newNode).insertBefore(newPostNavDiv);
+    }
 
     $('.unreadButton').click(function(e) {
         e.preventDefault();
@@ -42,7 +46,6 @@
                 div.removeClass('is-unread');
             }
         });
-        reaclculateElCount();
+        recalculateElCount();
     });
-
 })();
