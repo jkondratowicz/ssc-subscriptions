@@ -8,7 +8,7 @@
 // @grant       GM.openInTab
 // @version     1.1.0
 // @author      toonczyk
-// @downloadURL ---
+// @downloadURL https://raw.githubusercontent.com/jkondratowicz/ssc-subscriptions/master/ssc_subscriptions.js
 // ==/UserScript==
 
 (function() {
