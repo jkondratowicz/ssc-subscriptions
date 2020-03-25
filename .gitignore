@@ -1,0 +1,6 @@
+.idea_modules/
+*.log
+.env*
+.idea/
+.vs/
+.vscode/
