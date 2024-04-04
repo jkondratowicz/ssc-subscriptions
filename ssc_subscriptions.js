@@ -7,10 +7,11 @@
 // @include     https://www.skyscrapercity.com/whats-new/posts/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @grant       GM.openInTab
-// @version     1.1.2
+// @version     1.1.4
 // @author      toonczyk
 // @downloadURL https://raw.githubusercontent.com/jkondratowicz/ssc-subscriptions/master/ssc_subscriptions.js
 // ==/UserScript==
+
 
 (function() {
     'use strict';
@@ -25,6 +26,32 @@
         } else {
             newNode.innerHTML = '<span>No new posts.</span>';
         }
+    }
+
+    const queue = [];
+
+    function addToQueue(div, href) {
+        queue.push({
+            div,
+            href
+        });
+    }
+
+    function processQueue() {
+        let interval;
+        interval = window.setInterval(() => {
+            if(queue.length === 0) {
+                window.clearInterval(interval);
+                return;
+            }
+
+            openInNewTab(queue.pop());
+        }, 5);
+    }
+
+    function openInNewTab(obj) {
+        GM.openInTab(obj.href);
+        obj.div.removeClass('is-unread');
     }
 
     recalculateElCount();
@@ -42,10 +69,10 @@
             const div = $(el);
             const href = div.find('.structItem-title a').prop('href');
             if (href.match(/\/unread$/)) {
-                GM.openInTab(href);
-                div.removeClass('is-unread');
+                addToQueue(div, href);
             }
         });
+        processQueue();
         recalculateElCount();
     });
 })();
