@@ -7,7 +7,7 @@
 // @include     https://www.skyscrapercity.com/whats-new/posts/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
 // @grant       GM.openInTab
-// @version     1.1.4
+// @version     1.1.5
 // @author      toonczyk
 // @downloadURL https://raw.githubusercontent.com/jkondratowicz/ssc-subscriptions/master/ssc_subscriptions.js
 // ==/UserScript==
