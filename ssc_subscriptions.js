@@ -12,6 +12,7 @@
 // @downloadURL https://raw.githubusercontent.com/jkondratowicz/ssc-subscriptions/master/ssc_subscriptions.js
 // ==/UserScript==
 
+const NEW_TAB_DELAY_MS = 500;
 
 (function() {
     'use strict';
@@ -46,7 +47,7 @@
             }
 
             openInNewTab(queue.pop());
-        }, 5);
+        }, NEW_TAB_DELAY_MS);
     }
 
     function openInNewTab(obj) {
